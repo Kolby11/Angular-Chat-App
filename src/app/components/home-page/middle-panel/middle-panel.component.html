@@ -1,19 +1,19 @@
 <div class="panel">
-    <div class="userDetails">
+    <div class="userDetails" *ngIf="user!==undefined">
         <div class="userDetailsNav">
             <img alt="profileImage">
-            <button>Back</button>
+            <button (click)="userDetailClose()">Hide Detail</button>
         </div>
-        <p>Krstné meno: </p>
-        <p>Priezvisko: </p>
-        <p>Používateľské meno: </p>
-        <p>Dátum narodenia: </p>
-        <p>Farba očí: </p>
-        <p>Univerzita: </p>
-        <p>Mac Adresa: </p>
-        <p>Ip Adresa: </p>
-        <p>Mesto: </p>
-        <p>Testovacie pohlavie: </p>
-        <p>Informácie o domovskom štáte: </p>
+        <p><b>First name: </b>{{user.firstName}}</p>
+        <p><b>Last Name: </b>{{user.lastName}}</p>
+        <p><b>User name: </b>{{user.username}}</p>
+        <p><b>BirthDate: </b>{{user.birthDate}}</p>
+        <p><b>Eye color: </b>{{user.eyeColor}}</p>
+        <p><b>University: </b>{{user.university}}</p>
+        <p><b>Mac Address: </b>{{user.macAddress}}</p>
+        <p><b>Ip Address: </b>{{user.ip}}</p>
+        <p><b>City: </b>{{user.address.city}}</p>
+        <p><b>Testing gender: </b></p>
+        <p><b>Information about home state: </b></p>
     </div>
 </div>

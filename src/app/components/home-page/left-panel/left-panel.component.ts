@@ -14,10 +14,11 @@ export class LeftPanelComponent {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.users = this.userService.getUsers();
+    this.userService.users.subscribe((user: IUser) => this.users.push(user));
   }
 
-  userDetail(id: number): void {
-    console.log(this.userService.getUserDetails(id));
+  selectUser(id: number): void {
+    console.log(id);
+    this.userService.changeSelectedUser(id);
   }
 }

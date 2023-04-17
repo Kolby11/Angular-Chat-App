@@ -1,3 +1,5 @@
+import { IUser } from 'src/app/interfaces';
+import { UserService } from './../../../services/user.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,4 +7,19 @@ import { Component } from '@angular/core';
   templateUrl: './middle-panel.component.html',
   styleUrls: ['./middle-panel.component.scss', '../panel.scss'],
 })
-export class MiddlePanelComponent {}
+export class MiddlePanelComponent {
+  user: IUser | undefined = undefined;
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.userService.selectedUser.subscribe((user: IUser | undefined) => {
+      this.user = user;
+      console.log(user);
+    });
+  }
+
+  userDetailClose(): void {
+    this.userService.changeSelectedUser(0);
+  }
+}
