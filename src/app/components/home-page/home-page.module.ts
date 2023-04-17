@@ -6,6 +6,7 @@ import { LeftPanelComponent } from './left-panel/left-panel.component';
 import { MiddlePanelComponent } from './middle-panel/middle-panel.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RightPanelComponent } from './right-panel/right-panel.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { RightPanelComponent } from './right-panel/right-panel.component';
     MiddlePanelComponent,
     RightPanelComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, SharedModule],
   exports: [HomePageComponent, NavBarComponent],
 })
 export class HomePageModule {}

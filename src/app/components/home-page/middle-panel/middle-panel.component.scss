@@ -1,7 +1,21 @@
-.middle-panel{
-    height: 100vh;
+.window{
     display: flex;
     flex-direction: column;
-    border: 3px #655DBB solid;
-    border-top: 0px;
+}
+.userDetailsNav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.userDetails{
+    background-color: #5863F8;
+    border-radius: 25px;
+    display: block;
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px;
+}
+button{
+    border-radius: 10px;
+    width: 15%;
 }
