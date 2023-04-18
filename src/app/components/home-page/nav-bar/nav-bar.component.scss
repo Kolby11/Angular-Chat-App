@@ -1,6 +1,8 @@
+@import '../../../../styles.scss';
+
 nav{
     height: 70px;
-    background-color: #5863F8;
+    background-color: $primary;
     display: flex;
     justify-content: space-evenly;
     align-items: center;

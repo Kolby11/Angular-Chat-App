@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageModule } from './components/home-page/home-page.module';
 import { LoginPageModule } from './components/login-page/login-page.module';
-import { FooterComponent } from './components/shared/footer/footer.component';
 import { SharedModule } from './components/shared/shared.module';
 
 @NgModule({

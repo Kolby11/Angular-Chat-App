@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~normalize.css';
 
-$background: #1E1C1C;
-
+$primary: #5863F8;
+$background-primary: #121212;
+$background-secondary: #232224;
+$text-color: #EFE9F4;
 
 body{
-    background-color: $background;
-    color: #EFE9F4;
+    background-color: $background-primary;
+    color: $text-color;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }

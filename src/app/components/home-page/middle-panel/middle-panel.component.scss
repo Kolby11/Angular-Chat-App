@@ -1,21 +1,58 @@
+@import '../../../../styles.scss';
+
 .window{
     display: flex;
     flex-direction: column;
 }
-.userDetailsNav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 .userDetails{
-    background-color: #5863F8;
+    background-color: $primary;
     border-radius: 25px;
     display: block;
     flex-direction: column;
     padding: 20px;
     margin: 20px;
-}
-button{
-    border-radius: 10px;
-    width: 15%;
+
+    .userDetailsNav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+        .close-x{
+            align-self:baseline;
+            width:40px;
+            height:40px;
+            position:relative;
+            border-radius:6px;
+        }
+
+        .close-x:before,div:after{
+        content:'';
+        position:absolute;
+        width:36px;
+        height:4px;
+        background-color:$background-primary;
+        border-radius:2px;
+        top:16px;
+        }
+        .close-x:before{
+            -webkit-transform:rotate(45deg);
+            -moz-transform:rotate(45deg);
+            transform:rotate(45deg);
+            left:2px;
+        }
+        .close-x:after{
+            -webkit-transform:rotate(-45deg);
+            -moz-transform:rotate(-45deg);
+            transform:rotate(-45deg);
+            right:2px;
+        }
+    }
+
+    .profileImage{
+        border: 3px $background-secondary solid;
+        width: 20%;
+        height: 10%;
+        border-radius: 50%;
+    }
 }

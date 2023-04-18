@@ -1,8 +1,8 @@
 <div class="panel">
     <div class="userDetails" *ngIf="user!==undefined">
         <div class="userDetailsNav">
-            <img alt="profileImage">
-            <button (click)="userDetailClose()">Hide Detail</button>
+            <img class="profileImage" src={{user.image}} alt="profileImage">
+            <div class="close-x" (click)="userDetailClose()"></div>
         </div>
         <p><b>First name: </b>{{user.firstName}}</p>
         <p><b>Last Name: </b>{{user.lastName}}</p>

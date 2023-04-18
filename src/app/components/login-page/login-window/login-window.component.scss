@@ -1,0 +1,27 @@
+@import '../../../../styles.scss';
+
+
+.loginWindow{
+    background-color: $background-secondary;
+    border-radius: 20px;
+    padding: 20px;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+
+    input{
+        margin-top: 10px;
+        height: 30px;
+        border-radius: 7px;
+    }
+    h2{
+        align-self: center;
+        margin: 5px;
+    }
+    .inputField{
+        margin:10px;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+}
