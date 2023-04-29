@@ -19,7 +19,6 @@ export class LoginService {
       return user.firstName == firstName && user.lastName == lastName;
     });
     if (loggedUser) {
-      console.log(loggedUser);
       this.loggedUser.next(loggedUser);
       this.router.navigate(['/home']);
     }

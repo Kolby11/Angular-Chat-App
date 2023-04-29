@@ -56,3 +56,20 @@
         border-radius: 50%;
     }
 }
+.chats{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 3px $primary solid;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 20px;
+    transition: 100ms;
+
+    .chat{
+        margin: 10px 0px;
+        background-color: $primary;
+        border-radius: 10px;
+    }
+}
