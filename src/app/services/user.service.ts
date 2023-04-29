@@ -2,36 +2,34 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUser, IUserData } from '../interfaces';
 import { BehaviorSubject, Observable, filter, take } from 'rxjs';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  //user data service
+  url = 'https://dummyjson.com/users';
   //selected user service
-  private selectedUserSource = new BehaviorSubject<IUser | undefined>(
-    undefined
-  );
-  selectedUser = this.selectedUserSource.asObservable();
+  selectedUser = new BehaviorSubject<IUser | undefined>(undefined);
 
-  changeSelectedUser(id: number) {
-    if (id === 0) {
-      this.selectedUserSource.next(undefined);
+  constructor(private http: HttpClient) {}
+
+  changeSelectedUser(user: IUser | undefined) {
+    if (user === undefined) {
+      this.selectedUser.next(undefined);
+      return;
     }
-    console.log(`Change user ${id}`);
 
     this.users
       .pipe(
-        filter((user: IUser) => user.id === id),
+        filter((user_tmp: IUser) => user_tmp.id === user.id),
         take(1)
       )
       .subscribe((selectedUser: IUser) => {
-        this.selectedUserSource.next(selectedUser);
+        this.selectedUser.next(selectedUser);
       });
   }
-
-  //user data service
-  url = 'https://dummyjson.com/users';
-  constructor(private http: HttpClient) {}
 
   data: Observable<IUserData> = new Observable((subscriber) => {
     this.http.get<IUserData>(this.url).subscribe((data: IUserData) => {

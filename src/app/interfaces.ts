@@ -65,3 +65,35 @@ export interface IUserData {
   skip: number;
   limit: number;
 }
+export interface IGenderData {
+  count: number;
+  gender: string;
+  name: string;
+  probability: number;
+}
+export interface IStateInfo {
+  post_code: number;
+  country: string;
+  country_abbreviation: string;
+  places: [
+    {
+      place_name: string;
+      longitude: number;
+      state: string;
+      state_abbreviation: string;
+      latitude: number;
+    }
+  ];
+}
+export interface IChat {
+  id: number;
+  users: IUser[];
+  messages: IMessage[];
+}
+
+export interface IMessage {
+  chatId: number;
+  from: IUser;
+  message: string;
+  sendDate: string;
+}

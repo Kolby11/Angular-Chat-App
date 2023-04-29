@@ -1,8 +1,14 @@
 <div class="panel">
     <div class="usersPanel">
-        <div class="user" *ngFor="let user of users" (click)="selectUser(user.id)">
-            <p>{{user.firstName}} {{user.lastName}}</p>
-            <p>{{user.email}}</p>
+        <div class="user" *ngFor="let user of users" (click)="selectUser(user)">
+            <div class="userInfo">
+                <p>{{user.firstName}} {{user.lastName}}</p>
+                <p>{{user.email}}</p>
+            </div>
+            <div class="userControls" *ngIf="selectedUser?.id==user.id">
+                <button (click)="selectUserInfo(user)">Informations</button>
+                <button (click)="selectChat(user)">Chat</button>
+            </div>
         </div>
     </div>
 </div>
