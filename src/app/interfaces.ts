@@ -92,7 +92,6 @@ export interface IChat {
 }
 
 export interface IMessage {
-  chatId: number;
   from: IUser;
   message: string;
   sendDate: string;

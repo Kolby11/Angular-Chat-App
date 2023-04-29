@@ -1,8 +1,7 @@
-import { IChat, IGenderData, IStateInfo, IUser } from 'src/app/interfaces';
+import { IGenderData, IStateInfo, IUser } from 'src/app/interfaces';
 import { UserService } from './../../../services/user.service';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subscriber } from 'rxjs';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({

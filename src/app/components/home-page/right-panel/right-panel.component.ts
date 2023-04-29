@@ -28,7 +28,7 @@ export class RightPanelComponent {
     this.chatService.selectedChat.subscribe((chat: IChat | undefined) => {
       this.selectedChat = chat;
       this.userService
-        .getUserById(this.selectedChat?.users[0])
+        .getUserById(this.selectedChat?.users[0].id)
         .subscribe((user: IUser | undefined) => (this.user = user));
     });
   }
@@ -36,7 +36,7 @@ export class RightPanelComponent {
     let message: IMessage | undefined = undefined;
     if (this.loggedUser != undefined) {
       let message: IMessage = {
-        from: this.loggedUser.id,
+        from: this.loggedUser,
         message: msg,
         sendDate: new Date().toDateString(),
       };
