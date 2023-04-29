@@ -43,4 +43,12 @@ export class MiddlePanelComponent {
   userDetailClose(): void {
     this.userService.changeSelectedUser(undefined);
   }
+  
+  getGender(name:string):string{
+     this.http
+      .get('https://api.genderize.io', { params: name })
+      .pipe((genderData: genderData)=>{
+       map(gender:string)=>gender)
+  }
+  }
 }
