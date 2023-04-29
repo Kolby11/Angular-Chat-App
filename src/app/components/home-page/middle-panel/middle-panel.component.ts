@@ -1,8 +1,9 @@
-import { IGenderData, IStateInfo, IUser } from 'src/app/interfaces';
+import { IChat, IGenderData, IStateInfo, IUser } from 'src/app/interfaces';
 import { UserService } from './../../../services/user.service';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subscriber } from 'rxjs';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-middle-panel',
@@ -14,7 +15,11 @@ export class MiddlePanelComponent {
   gender: string = 'Undefined';
   state: string = 'No country info';
 
-  constructor(private userService: UserService, private http: HttpClient) {}
+  constructor(
+    private userService: UserService,
+    public chatService: ChatService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.userService.selectedUser.subscribe((user: IUser | undefined) => {
@@ -42,13 +47,5 @@ export class MiddlePanelComponent {
   }
   userDetailClose(): void {
     this.userService.changeSelectedUser(undefined);
-  }
-  
-  getGender(name:string):string{
-     this.http
-      .get('https://api.genderize.io', { params: name })
-      .pipe((genderData: genderData)=>{
-       map(gender:string)=>gender)
-  }
   }
 }

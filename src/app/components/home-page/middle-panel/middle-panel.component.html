@@ -16,4 +16,10 @@
         <p><b>Testing gender: </b>{{gender}}</p>
         <p><b>Information about home state: </b>{{state}}</p>
     </div>
+    <div class="chats" *ngIf="user==undefined">
+        <div class="chat" *ngFor="let chat of this.chatService.chats;">
+            <p>To: {{chat.users[0].firstName}}</p>
+        </div>
+
+    </div>
 </div>

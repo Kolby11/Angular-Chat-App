@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { IChat, IMessage, IUser } from './../interfaces';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, filter, from, take } from 'rxjs';
 import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
-  private chats: IChat[] = [];
+  chats: IChat[] = [];
   private loggedUser: IUser | undefined = undefined;
 
   selectedChat = new BehaviorSubject<IChat | undefined>(undefined);
@@ -19,31 +19,47 @@ export class ChatService {
     );
   }
 
-  changeSelectedChat(user: IUser): void {
-    let chat: IChat | undefined = this.chats.find((chat: IChat) => {
-      this.loggedUser &&
-        this.loggedUser?.id in chat.users &&
-        chat.users.filter((user_tmp) => {
-          user_tmp.id == user.id;
-        }, take(1));
+  getChatByUserId(userId: number): IChat | undefined {
+    return this.chats.find((chat) => {
+      const hasLoggedUser = chat.users.some(
+        (user) => user.id === this.loggedUser?.id
+      );
+      const hasUser = chat.users.some((user) => user.id === userId);
+      return hasLoggedUser && hasUser;
     });
-    if (chat == undefined && this.loggedUser != undefined) {
-      this.createChat([this.loggedUser, user]);
-      chat = this.chats.find((chat: IChat) => {
-        this.loggedUser &&
-          this.loggedUser?.id in chat.users &&
-          user.id in chat.users;
-      });
-    }
-    console.warn(chat);
+  }
+
+  changeSelectedChat(user: IUser) {
+    const loggedUser = this.loggedUser;
+    const chat =
+      this.getChatByUserId(user.id) ||
+      this.createChat(
+        [user, loggedUser].filter((u): u is IUser => u !== undefined)
+      );
+
     this.selectedChat.next(chat);
   }
 
-  createChat(users: IUser[]): void {
-    let id =
-      this.chats.length > 0 ? this.chats[this.chats.length - 1].id + 1 : 0;
-    const chat: IChat = { id: id, users: users, messages: [] };
-    this.chats.push(chat);
+  createChat(users: IUser[]): IChat {
+    // check if a chat object with the same users already exists
+    const existingChat = this.chats.find((chat) =>
+      chat.users.every((user) => users.some((u) => u.id === user.id))
+    );
+    if (existingChat) {
+      return existingChat;
+    }
+
+    // create a new chat object
+    const newChat: IChat = {
+      id: this.chats.length + 1,
+      users,
+      messages: [],
+    };
+
+    // append the new chat object to the chats array
+    this.chats.push(newChat);
+
+    return newChat;
   }
 
   sendMessage(chatId: number, message: IMessage): void {
