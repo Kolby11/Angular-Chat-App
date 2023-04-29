@@ -30,7 +30,7 @@ export class LeftPanelComponent {
     this.userService.changeSelectedUser(user);
   }
 
-  selectChat(user: IUser): void {
-    this.chatService.changeSelectedChat(user);
+  selectChat(userId: number): void {
+    this.chatService.changeSelectedChat(userId);
   }
 }

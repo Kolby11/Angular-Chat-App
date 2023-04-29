@@ -7,7 +7,7 @@
             </div>
             <div class="userControls" *ngIf="selectedUser?.id==user.id">
                 <button (click)="selectUserInfo(user)">Informations</button>
-                <button (click)="selectChat(user)">Chat</button>
+                <button (click)="selectChat(user.id)">Chat</button>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUser, IUserData } from '../interfaces';
@@ -44,4 +45,11 @@ export class UserService {
       });
     });
   });
+
+  getUserById(id: number | undefined): Observable<IUser | undefined> {
+    return this.users.pipe(
+      filter((u: IUser) => u.id === id),
+      take(1)
+    );
+  }
 }

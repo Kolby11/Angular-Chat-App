@@ -48,4 +48,10 @@ export class MiddlePanelComponent {
   userDetailClose(): void {
     this.userService.changeSelectedUser(undefined);
   }
+  getUser(id: number | undefined): IUser | undefined {
+    this.userService.getUserById(id).subscribe((user) => {
+      return user;
+    });
+    return undefined;
+  }
 }

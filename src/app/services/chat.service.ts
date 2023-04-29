@@ -9,41 +9,41 @@ import { LoginService } from './login.service';
 })
 export class ChatService {
   chats: IChat[] = [];
-  private loggedUser: IUser | undefined = undefined;
+  private loggedUser: number | undefined = undefined;
 
   selectedChat = new BehaviorSubject<IChat | undefined>(undefined);
 
   constructor(private http: HttpClient, private loginService: LoginService) {
     loginService.loggedUser.subscribe(
-      (user: IUser | undefined) => (this.loggedUser = user)
+      (user: IUser | undefined) => (this.loggedUser = user?.id)
     );
   }
 
   getChatByUserId(userId: number): IChat | undefined {
     return this.chats.find((chat) => {
-      const hasLoggedUser = chat.users.some(
-        (user) => user.id === this.loggedUser?.id
-      );
-      const hasUser = chat.users.some((user) => user.id === userId);
+      const hasLoggedUser = chat.users.some((id) => id === this.loggedUser);
+      const hasUser = chat.users.some((id) => id === userId);
       return hasLoggedUser && hasUser;
     });
   }
 
-  changeSelectedChat(user: IUser) {
+  changeSelectedChat(userId: number) {
     const loggedUser = this.loggedUser;
-    const chat =
-      this.getChatByUserId(user.id) ||
-      this.createChat(
-        [user, loggedUser].filter((u): u is IUser => u !== undefined)
-      );
+    let chat: IChat | undefined = undefined;
+    if (loggedUser != undefined) {
+      chat =
+        this.getChatByUserId(userId) || this.createChat([userId, loggedUser]);
+    }
 
     this.selectedChat.next(chat);
   }
 
-  createChat(users: IUser[]): IChat {
-    // check if a chat object with the same users already exists
-    const existingChat = this.chats.find((chat) =>
-      chat.users.every((user) => users.some((u) => u.id === user.id))
+  createChat(users: number[]): IChat {
+    // check if a chat object with the same set of users already exists
+    const existingChat = this.chats.find(
+      (chat) =>
+        chat.users.length === users.length &&
+        chat.users.every((user: number, index: number) => user === users[index])
     );
     if (existingChat) {
       return existingChat;

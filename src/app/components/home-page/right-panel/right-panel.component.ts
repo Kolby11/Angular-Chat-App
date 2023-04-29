@@ -3,6 +3,7 @@ import { IChat, IUser } from 'src/app/interfaces';
 import { Component } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 import { LoginService } from 'src/app/services/login.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-right-panel',
@@ -11,12 +12,13 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class RightPanelComponent {
   private loggedUser: IUser | undefined = undefined;
-
   user: IUser | undefined = undefined;
+
   selectedChat: IChat | undefined = undefined;
   constructor(
     private loginService: LoginService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private userService: UserService
   ) {
     loginService.loggedUser.subscribe(
       (user: IUser | undefined) => (this.loggedUser = user)
@@ -25,14 +27,16 @@ export class RightPanelComponent {
   ngOnInit(): void {
     this.chatService.selectedChat.subscribe((chat: IChat | undefined) => {
       this.selectedChat = chat;
-      this.user = this.selectedChat?.users[0];
+      this.userService
+        .getUserById(this.selectedChat?.users[0])
+        .subscribe((user: IUser | undefined) => (this.user = user));
     });
   }
   sendMessage(msg: string): void {
     let message: IMessage | undefined = undefined;
     if (this.loggedUser != undefined) {
       let message: IMessage = {
-        from: this.loggedUser,
+        from: this.loggedUser.id,
         message: msg,
         sendDate: new Date().toDateString(),
       };

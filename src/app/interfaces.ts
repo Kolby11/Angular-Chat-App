@@ -87,12 +87,12 @@ export interface IStateInfo {
 }
 export interface IChat {
   id: number;
-  users: IUser[];
+  users: number[];
   messages: IMessage[];
 }
 
 export interface IMessage {
-  from: IUser;
+  from: number;
   message: string;
   sendDate: string;
 }
