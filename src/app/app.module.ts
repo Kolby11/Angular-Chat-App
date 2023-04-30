@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomePageModule } from './components/home-page/home-page.module';
 import { LoginPageModule } from './components/login-page/login-page.module';
 import { SharedModule } from './components/shared/shared.module';
+import { InfoModule } from './components/info-page/info.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { SharedModule } from './components/shared/shared.module';
     HomePageModule,
     LoginPageModule,
     SharedModule,
+    InfoModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

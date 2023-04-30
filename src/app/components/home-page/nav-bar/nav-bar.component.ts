@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,8 +13,13 @@ export class NavBarComponent {
   loginDate: string = new Date().toDateString();
   clickCount: number = 0;
   keyCount: number = 0;
+  navbarService: NavbarService;
 
-  constructor(private loginService: LoginService) {
+  constructor(
+    private loginService: LoginService,
+    navbarService: NavbarService
+  ) {
+    this.navbarService = navbarService;
     loginService.loggedUser.subscribe((user) => {
       this.firstName = user?.firstName;
       this.lastName = user?.lastName;
@@ -21,13 +27,13 @@ export class NavBarComponent {
   }
   ngOnInit(): void {
     document.addEventListener('click', () => this.addClickCount());
-    document.addEventListener('keydown', () => this.addkeyCount());
   }
 
   addClickCount(): void {
     this.clickCount += 1;
   }
-  addkeyCount(): void {
-    this.keyCount += 1;
+
+  logout(): void {
+    this.loginService.logout();
   }
 }

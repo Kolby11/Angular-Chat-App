@@ -17,8 +17,10 @@
         <p><b>Information about home state: </b>{{state}}</p>
     </div>
     <div class="chats" *ngIf="user==undefined">
-        <div class="chat" *ngFor="let chat of this.chatService.chats;">
+        <div class="chat" *ngFor="let chat of this.chatService.chats;" (click)="selectChat(chat.users[0])">
             <p>To: {{chat.users[0].firstName}}</p>
+            <p *ngIf="chat.messages.length>0">Last message: {{chat.messages[chat.messages.length - 1].message}}</p>
+            <p *ngIf="chat.messages.length>0">Date: {{chat.messages[chat.messages.length - 1].sendDate}}</p>
         </div>
 
     </div>

@@ -96,3 +96,14 @@ export interface IMessage {
   message: string;
   sendDate: string;
 }
+
+export interface IPostResponse {
+  args: {};
+  data: { text: string };
+  files: {};
+  form: {};
+  headers: {};
+  json: { text: string };
+  origin: string;
+  url: string;
+}

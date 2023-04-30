@@ -7,6 +7,7 @@ import { MiddlePanelComponent } from './middle-panel/middle-panel.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RightPanelComponent } from './right-panel/right-panel.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     MiddlePanelComponent,
     RightPanelComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, FormsModule],
   exports: [HomePageComponent, NavBarComponent],
 })
 export class HomePageModule {}

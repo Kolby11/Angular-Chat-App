@@ -1,4 +1,4 @@
-import { IGenderData, IStateInfo, IUser } from 'src/app/interfaces';
+import { IChat, IGenderData, IStateInfo, IUser } from 'src/app/interfaces';
 import { UserService } from './../../../services/user.service';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -46,5 +46,8 @@ export class MiddlePanelComponent {
   }
   userDetailClose(): void {
     this.userService.changeSelectedUser(undefined);
+  }
+  selectChat(user: IUser) {
+    this.chatService.changeSelectedChat(user);
   }
 }

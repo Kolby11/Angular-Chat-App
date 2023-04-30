@@ -1,10 +1,23 @@
 <div class="panel">
-    <div class="chatPanel">
+    <div *ngIf="selectedChat!=undefined" class="chatPanel">
         <div class="chatInfo">
-            <p>{{user?.id}}</p>
-            <p>{{selectedChat?.id}}</p>
+            <p>{{user?.firstName}}{{user?.lastName}}</p>
+            <button (click)="closeChat()" style="margin-left: 20px;">Close</button>
         </div>
-        <div></div>
-        <input type="text">
+        <div class="messages">
+            <div class="message" *ngFor="let message of selectedChat?.messages">
+                <div class="myMessage" *ngIf="message.from.id==loggedUser?.id">
+                    {{message.message}}
+                </div>
+                <div class="foreignMessage" *ngIf="message.from.id!=loggedUser?.id">
+                    {{message.message}}
+                </div>
+            </div>
+            
+        </div>
+        <div style="display: flex; justify-content:center; height:5%">
+            <input type="text" [(ngModel)]="msg" (ngModelChange)="onMsgChange($event)"><input type="submit" (click)="sendMessage()">
+        </div>
+        
     </div>
 </div>

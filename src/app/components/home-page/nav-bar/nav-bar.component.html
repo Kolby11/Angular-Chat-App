@@ -1,8 +1,8 @@
 <nav>
     <p>Logged in as: {{firstName}} {{lastName}}</p>
     <p>Login Date: {{loginDate}}</p>
-    <p>Number of characters used in chats: {{keyCount}}</p>
+    <p>Number of characters used in chats: {{navbarService.getUsedCharacter()}}</p>
     <p>Number of clicks: {{clickCount}}</p>
-    <button class="logout-button">Logout</button>
+    <button class="logout-button" (click)="logout()">Logout</button>
 
 </nav>

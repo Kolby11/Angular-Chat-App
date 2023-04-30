@@ -61,15 +61,31 @@ export class ChatService {
     }
   }
 
+  closeChat(): void {
+    this.selectedChat.next(undefined);
+  }
   sendMessage(chatId: number, message: IMessage): void {
-    const body = { text: message.message };
-    this.http.post('https://httpbin.org/post', body);
+    let updatedChat: IChat | undefined = undefined;
 
+    // Find the chat object with the matching chatId and update its messages array
     for (let i = 0; i < this.chats.length; i++) {
-      if (this.chats[i].id == chatId) {
-        this.chats[i].messages.push(message);
+      if (this.chats[i].id === chatId) {
+        // Clone the chat object so that we don't modify the original
+        updatedChat = Object.assign({}, this.chats[i]);
+
+        // Add the new message to the messages array of the cloned chat object
+        updatedChat.messages.push(message);
+
+        // Update the chats array with the cloned and updated chat object
+        this.chats[i] = updatedChat;
+
+        // Exit the loop since we found and updated the chat object
         break;
       }
+    }
+
+    if (updatedChat === undefined) {
+      console.error('Could not find chat with id:', chatId);
     }
   }
 }

@@ -1,9 +1,7 @@
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUser, IUserData } from '../interfaces';
 import { BehaviorSubject, Observable, filter, take } from 'rxjs';
-import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root',
